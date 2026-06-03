@@ -8,7 +8,6 @@ import {
 import { useAuth } from '../context/AuthContext'
 import { useContent } from '../hooks/useContent'
 import * as api from '../services/api'
-import { isSupabaseConfigured } from '../lib/supabase'
 import NotificationBell from '../components/NotificationBell'
 import './Admin.css'
 
@@ -25,27 +24,13 @@ const TABS = [
 ]
 
 export default function Admin() {
-  const { isAdmin, loading, user, signOut, isSupabaseConfigured } = useAuth()
+  const { isAdmin, loading, user, signOut } = useAuth()
   const [tab, setTab] = useState('services')
   const [toast, setToast] = useState(null)
 
   const showToast = (msg, kind = 'success') => {
     setToast({ msg, kind })
     setTimeout(() => setToast(null), 3500)
-  }
-
-  if (!isSupabaseConfigured) {
-    return (
-      <div className="admin-page">
-        <div className="container">
-          <div className="admin-not-configured">
-            <h2>Supabase is not configured</h2>
-            <p>Add your Supabase credentials to <code>.env.local</code> and restart the dev server to access the admin panel.</p>
-            <Link to="/admin/login" className="btn btn-primary">Go to sign-in</Link>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   if (loading) {

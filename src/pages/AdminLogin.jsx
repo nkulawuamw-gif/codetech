@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { FiLock, FiMail, FiAlertCircle, FiArrowRight, FiDatabase } from 'react-icons/fi'
+import { FiLock, FiMail, FiAlertCircle, FiArrowRight } from 'react-icons/fi'
 import { useAuth } from '../context/AuthContext'
 import './AdminLogin.css'
 
 export default function AdminLogin() {
-  const { signIn, isAdmin, user, isSupabaseConfigured } = useAuth()
+  const { signIn, isAdmin, user } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -54,19 +54,6 @@ export default function AdminLogin() {
           <h1>Sign in</h1>
           <p className="form-sub">Welcome back. Please enter your admin credentials.</p>
 
-          {!isSupabaseConfigured && (
-            <div className="admin-warn">
-              <FiDatabase />
-              <div>
-                <strong>Supabase is not configured</strong>
-                <p>
-                  Add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>.env.local</code>
-                  {' '}and restart the dev server. See the README for setup.
-                </p>
-              </div>
-            </div>
-          )}
-
           {error && (
             <div className="admin-error">
               <FiAlertCircle /> {error}
@@ -108,7 +95,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             className="btn btn-primary btn-block btn-lg"
-            disabled={submitting || !isSupabaseConfigured}
+            disabled={submitting}
           >
             {submitting ? 'Signing in…' : <>Sign in <FiArrowRight /></>}
           </button>

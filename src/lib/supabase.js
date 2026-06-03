@@ -1,23 +1,10 @@
-// Supabase client wrapper
-// If VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in .env,
-// the app will fetch content from PostgreSQL. Otherwise it falls
-// back to the local data file (src/data/content.js).
-
 import { createClient } from '@supabase/supabase-js'
 
-const url = import.meta.env.VITE_SUPABASE_URL
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-export const isSupabaseConfigured = Boolean(url && anonKey)
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("Supabase is not configured")
+}
 
-export const supabase = isSupabaseConfigured
-  ? createClient(url, anonKey, {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        storage: window.localStorage,
-      },
-    })
-  : null
-
-export default supabase
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)

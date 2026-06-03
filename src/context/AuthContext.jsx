@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import { supabase, isSupabaseConfigured } from '../lib/supabase'
+import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(isSupabaseConfigured)
+  const [loading, setLoading] = useState(true)
 
   const loadProfile = useCallback(async (uid) => {
     if (!supabase || !uid) return null
@@ -20,10 +20,6 @@ export function AuthProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    if (!isSupabaseConfigured) {
-      setLoading(false)
-      return
-    }
     let mounted = true
     supabase.auth.getSession().then(async ({ data }) => {
       if (!mounted) return
@@ -67,7 +63,7 @@ export function AuthProvider({ children }) {
   const isAdmin = Boolean(profile?.role === 'admin')
 
   return (
-    <AuthContext.Provider value={{ user, profile, isAdmin, loading, signIn, signOut, isSupabaseConfigured }}>
+    <AuthContext.Provider value={{ user, profile, isAdmin, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

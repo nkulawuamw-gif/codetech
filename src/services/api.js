@@ -1,7 +1,7 @@
 // Data layer — Supabase first, local fallback.
 // Pages import from here instead of `data/content.js` directly.
 
-import { supabase, isSupabaseConfigured } from '../lib/supabase'
+import { supabase } from '../lib/supabase'
 import * as local from '../data/content'
 
 const FALLBACK_WARNED = { current: false }
@@ -16,10 +16,6 @@ const logFallback = (table) => {
 }
 
 const safeQuery = async (table, fallback, transform) => {
-  if (!isSupabaseConfigured) {
-    logFallback(table)
-    return Array.isArray(fallback) ? fallback : []
-  }
   const { data, error } = await supabase.from(table).select('*').order('sort_order', { ascending: true })
   if (error) {
     console.warn(`[code-tech] Supabase ${table} fetch failed, using fallback:`, error.message)
@@ -80,7 +76,6 @@ export async function getDemoSites() {
 // ----- Admin write API (requires authenticated admin) -----
 
 export async function updateService(id, patch) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data, error } = await supabase
     .from('services')
     .update({
@@ -102,7 +97,6 @@ export async function updateService(id, patch) {
 }
 
 export async function updateHostingPlan(id, patch) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data, error } = await supabase
     .from('hosting_plans')
     .update({
@@ -121,7 +115,6 @@ export async function updateHostingPlan(id, patch) {
 }
 
 export async function updateDemoSite(id, patch) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data, error } = await supabase
     .from('demo_sites')
     .update({
@@ -142,7 +135,6 @@ export async function updateDemoSite(id, patch) {
 }
 
 export async function updateDomain(name, patch) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data, error } = await supabase
     .from('domains')
     .update({
@@ -161,10 +153,6 @@ export async function updateDomain(name, patch) {
 // ----- Orders -----
 
 export async function placeOrder(order, items) {
-  if (!isSupabaseConfigured) {
-    // No DB — just return the reference so the UI flow continues
-    return { reference: order.reference, id: null }
-  }
   const { data: orderRow, error: orderError } = await supabase
     .from('orders')
     .insert({
@@ -204,7 +192,6 @@ export async function placeOrder(order, items) {
 }
 
 export async function getOrders() {
-  if (!isSupabaseConfigured) return []
   const { data, error } = await supabase
     .from('orders')
     .select('*, order_items(*)')
@@ -214,7 +201,6 @@ export async function getOrders() {
 }
 
 export async function updateOrderStatus(id, status) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { error } = await supabase.from('orders').update({ status }).eq('id', id)
   if (error) throw error
 }
@@ -222,7 +208,7 @@ export async function updateOrderStatus(id, status) {
 // ----- Notifications (DB) -----
 
 export async function getRemoteNotifications() {
-  if (!isSupabaseConfigured) return []
+
   const { data, error } = await supabase
     .from('notifications')
     .select('*')
@@ -235,9 +221,7 @@ export async function getRemoteNotifications() {
 // ----- Demo requests -----
 
 export async function submitDemoRequest(data) {
-  if (!isSupabaseConfigured) {
-    return { id: null }
-  }
+
   const { data: row, error } = await supabase
     .from('demo_requests')
     .insert({
@@ -258,7 +242,7 @@ export async function submitDemoRequest(data) {
 }
 
 export async function getDemoRequests() {
-  if (!isSupabaseConfigured) return []
+
   const { data, error } = await supabase
     .from('demo_requests')
     .select('*')
@@ -270,7 +254,7 @@ export async function getDemoRequests() {
 // ----- Contact messages -----
 
 export async function submitContactMessage(data) {
-  if (!isSupabaseConfigured) return { id: null }
+
   const { data: row, error } = await supabase
     .from('contact_messages')
     .insert({
@@ -288,7 +272,7 @@ export async function submitContactMessage(data) {
 }
 
 export async function getContactMessages() {
-  if (!isSupabaseConfigured) return []
+
   const { data, error } = await supabase
     .from('contact_messages')
     .select('*')
@@ -298,14 +282,14 @@ export async function getContactMessages() {
 }
 
 export async function markMessageRead(id) {
-  if (!isSupabaseConfigured) return
+
   await supabase.from('contact_messages').update({ read: true }).eq('id', id)
 }
 
 // ----- Testimonials -----
 
 export async function getTestimonials() {
-  if (!isSupabaseConfigured) return []
+
   const { data, error } = await supabase
     .from('testimonials')
     .select('*')
@@ -315,7 +299,6 @@ export async function getTestimonials() {
 }
 
 export async function createTestimonial(data) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data: row, error } = await supabase
     .from('testimonials')
     .insert({
@@ -332,7 +315,6 @@ export async function createTestimonial(data) {
 }
 
 export async function updateTestimonial(id, patch) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { data, error } = await supabase
     .from('testimonials')
     .update({
@@ -350,7 +332,6 @@ export async function updateTestimonial(id, patch) {
 }
 
 export async function deleteTestimonial(id) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { error } = await supabase.from('testimonials').delete().eq('id', id)
   if (error) throw error
 }
@@ -358,7 +339,7 @@ export async function deleteTestimonial(id) {
 // ----- Site settings -----
 
 export async function getSiteSetting(key) {
-  if (!isSupabaseConfigured) return null
+ null
   const { data, error } = await supabase
     .from('site_settings')
     .select('value')
@@ -369,7 +350,7 @@ export async function getSiteSetting(key) {
 }
 
 export async function getSiteSettings() {
-  if (!isSupabaseConfigured) return {}
+
   const { data, error } = await supabase
     .from('site_settings')
     .select('*')
@@ -380,7 +361,6 @@ export async function getSiteSettings() {
 }
 
 export async function updateSiteSetting(key, value) {
-  if (!isSupabaseConfigured) throw new Error('Supabase not configured')
   const { error } = await supabase
     .from('site_settings')
     .upsert({ key, value, updated_at: new Date().toISOString() })
@@ -444,7 +424,7 @@ export async function checkDomain(domain) {
 }
 
 export async function pushRemoteNotification(n) {
-  if (!isSupabaseConfigured) return null
+ null
   const { data, error } = await supabase
     .from('notifications')
     .insert({
