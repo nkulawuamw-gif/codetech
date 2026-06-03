@@ -1,0 +1,230 @@
+/* Domain search form */
+.domain-search-form {
+  display: flex;
+  gap: 12px;
+  max-width: 700px;
+  margin: 40px auto 0;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+}
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  background: var(--bg-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.search-icon { color: var(--text-dim); font-size: 18px; }
+.search-input-wrap input {
+  border: none;
+  background: transparent;
+  padding: 14px 0;
+  font-size: 16px;
+}
+.search-input-wrap input:focus { box-shadow: none; background: transparent; }
+
+/* Search results */
+.search-results-section { padding: 40px 0; }
+.search-results-section h2 { font-size: 22px; margin-bottom: 24px; }
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  transition: all 0.2s ease;
+}
+.result-card.available { border-color: rgba(16, 185, 129, 0.4); }
+.result-card.taken { opacity: 0.7; }
+.result-domain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.result-name { font-weight: 700; font-size: 16px; }
+.badge {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.badge-bad { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.result-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result-price { font-size: 18px; font-weight: 700; }
+.result-price span { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+/* Domain list */
+.domains-list-section { padding: 60px 0; }
+.domain-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.pill:hover { color: var(--text); border-color: var(--border-strong); }
+.pill.active {
+  background: var(--grad-primary);
+  color: white;
+  border-color: transparent;
+}
+.domain-search-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  min-width: 240px;
+}
+.domain-search-mini svg { color: var(--text-dim); }
+.domain-search-mini input {
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.domain-search-mini input:focus { box-shadow: none; background: transparent; }
+
+.domains-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.domain-card {
+  position: relative;
+  text-align: center;
+  padding: 24px 18px;
+}
+.domain-card .popular-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--grad-warm);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.domain-tld {
+  font-size: 32px;
+  font-weight: 800;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.domain-desc {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 18px;
+  min-height: 36px;
+}
+.domain-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.domain-price { display: flex; align-items: baseline; gap: 2px; }
+.domain-price .from { font-size: 11px; color: var(--text-dim); }
+.domain-price .amount { font-size: 22px; font-weight: 800; color: var(--text); }
+.domain-price .period { font-size: 12px; color: var(--text-muted); }
+
+.domain-features { padding: 60px 0 80px; }
+.feat-card { text-align: center; }
+.feat-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--grad-soft);
+  border: 1px solid var(--border);
+  color: var(--primary-light);
+  font-size: 24px;
+  margin: 0 auto 16px;
+}
+.feat-card h3 { font-size: 17px; margin-bottom: 6px; }
+.feat-card p { color: var(--text-muted); font-size: 14px; }
+
+/* Loading placeholder */
+.result-card.loading { opacity: 0.5; pointer-events: none; }
+.placeholder {
+  display: inline-block;
+  background: var(--border);
+  border-radius: 6px;
+  color: transparent !important;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.badge.placeholder { width: 80px; height: 20px; }
+.result-price.placeholder { width: 100px; height: 22px; }
+.result-name.placeholder { width: 120px; height: 18px; }
+.btn.placeholder { width: 100px; height: 36px; border: none; }
+
+/* Badge variants */
+.badge-warn {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.result-card.error { opacity: 0.7; }
+
+/* Method note */
+.search-method-note {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: -16px 0 24px;
+}
+
+@media (max-width: 640px) {
+  .domain-search-form { flex-direction: column; }
+  .search-input-wrap input { padding: 10px 0; }
+}

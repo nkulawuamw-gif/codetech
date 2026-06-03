@@ -1,0 +1,107 @@
+/* Billing toggle */
+.billing-toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-top: 32px;
+}
+.billing-toggle button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+.billing-toggle button:hover { color: var(--text); }
+.billing-toggle button.active {
+  background: var(--grad-primary);
+  color: white;
+}
+.save-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Plans */
+.plans-section { padding: 40px 0 80px; }
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+.plans-grid .plan-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hosting types */
+.hosting-types { padding: 60px 0; background: var(--bg-2); }
+.type-card {
+  text-align: left;
+  position: relative;
+}
+.type-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--grad-soft);
+  border: 1px solid var(--border);
+  color: var(--primary-light);
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.type-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.type-card h3 { font-size: 19px; margin-bottom: 6px; }
+.type-card p { color: var(--text-muted); font-size: 14px; }
+
+/* Features */
+.hosting-features { padding: 60px 0 80px; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.mini-feat {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+}
+.mini-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--grad-soft);
+  color: var(--primary-light);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.mini-feat h4 { font-size: 15px; margin-bottom: 4px; }
+.mini-feat p { color: var(--text-muted); font-size: 13px; }

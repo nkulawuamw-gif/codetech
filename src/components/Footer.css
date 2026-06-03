@@ -1,0 +1,169 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 80px;
+  padding: 60px 0 24px;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 20, 36, 0.8) 100%);
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-tag {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 20px;
+  max-width: 320px;
+}
+.socials {
+  display: flex;
+  gap: 10px;
+}
+.socials a {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+.socials a:hover {
+  background: var(--grad-primary);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.footer-col h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+.footer-col ul li a {
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+.footer-col ul li a:hover { color: var(--primary-light); }
+
+.contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.contact-list li svg {
+  flex-shrink: 0;
+  color: var(--primary-light);
+  margin-top: 3px;
+}
+.contact-list .muted { color: var(--text-dim); font-size: 13px; }
+
+/* WhatsApp link styling */
+.wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #25d366 !important;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+.wa-link:hover { opacity: 0.8; }
+.wa-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #25d366;
+  color: white;
+  flex-shrink: 0;
+}
+.wa-icon svg { color: white; }
+
+/* Phone number linked to WhatsApp */
+.phone-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 600;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.phone-wa-link:hover { color: #25d366; }
+.phone-wa-link:hover .wa-inline-icon { background: #25d366; }
+.phone-wa-link:hover .wa-inline-icon svg { color: white; }
+.wa-inline-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+.wa-inline-icon svg { color: #25d366; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-bottom-links a {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.footer-bottom-links a:hover { color: var(--primary-light); }
+.back-top {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+.back-top:hover {
+  background: var(--primary);
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
